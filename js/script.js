@@ -29,7 +29,7 @@ if (navigator.getUserMedia) {
 }
 
 video.addEventListener('play', function () {
-    draw(this, canvas_context, 400, 300); //different canvas size
+    draw(this, canvas_context, canvas.width, canvas.height);
 }, false);
 
 function draw(video, context, width, height) {
@@ -43,8 +43,7 @@ function draw(video, context, width, height) {
         r = data[i];
         g = data[i + 1];
         b = data[i + 2];
-        brightness = (r + g + b) / 3;
-        data[i] = data[i + 1] = data[i + 2] = brightness;
+        modifyData(data, r, i, g, i + 1);
     }
 
     image.data = data;
@@ -52,7 +51,11 @@ function draw(video, context, width, height) {
     setTimeout(draw, 10, video, context, width, height);
 }
 
-function permissionRQT() {
+function modifyData(data, firstHue, firstChannel, secondHue, secondChannel) {
+    data[firstChannel] = data[secondChannel] = (firstHue + secondHue) / 2;
+}
+
+function permissionRQT() { //block undo
     navigator.getUserMedia({
         video: true
     }, function (stream) {

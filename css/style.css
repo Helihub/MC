@@ -7,6 +7,7 @@ header {
 
 footer {
     min-height: 15vh;
+    padding: 10px;
 }
 
 header, footer {
@@ -81,7 +82,8 @@ header, footer {
     min-height: 300px;
 }
 
-#camera_buttons {
+#button-group {
     position: absolute;
-    right: 0px;
+    right: 10px;
+
 }
