@@ -16,7 +16,6 @@ navigator.getUserMedia =
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia;
 
-console.log("video: " + JSON.stringify(typeof (video))); //debug
 if (navigator.getUserMedia) {
     navigator.getUserMedia({
         video: true, audio: false
@@ -30,7 +29,7 @@ if (navigator.getUserMedia) {
 }
 
 video.addEventListener('play', function () {
-    draw(this, canvas_context, 400, 300);
+    draw(this, canvas_context, 400, 300); //different canvas size
 }, false);
 
 function draw(video, context, width, height) {
@@ -51,4 +50,17 @@ function draw(video, context, width, height) {
     image.data = data;
     context.putImageData(image, 0, 0);
     setTimeout(draw, 10, video, context, width, height);
+}
+
+function permissionRQT() {
+    navigator.getUserMedia({
+        video: true
+    }, function (stream) {
+        video.src = vendorURL.createObjectURL(stream);
+        video.play();
+    }, errorCallback)
+}
+
+function cameraSwap() {
+    //TODO
 }
