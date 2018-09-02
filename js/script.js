@@ -3,7 +3,8 @@ var video = document.getElementById('video'),
     canvas = document.getElementById('canvas'),
     canvas_context = canvas.getContext('2d'),
     vendorURL = window.URL || window.webkitURL,
-    video_switch = document.getElementById('permission_switch');
+    video_switch = document.getElementById('permission_switch'),
+    mode = "yb";
 
 var noPermision = function (e) {
     // User rejected camera request. Handle appropriately.
@@ -59,6 +60,10 @@ function cameraTurnedOff() {
     video_switch.checked = false;
 }
 
+$('.list-group-item').on('click', function () {
+    mode = $(this).attr('id');
+})
+
 video.addEventListener('ended', function () {
     cameraTurnedOff();
 }, false);
@@ -68,26 +73,40 @@ video.addEventListener('play', function () {
 }, false);
 
 function draw(video, context, width, height) {
-    var image, data, i, r, g, b, brightness;
+    var data, brightness;
 
     context.drawImage(video, 0, 0, width, height);
     image = context.getImageData(0, 0, width, height);
     data = image.data;
 
-    for (i = 0; i < data.length; i = i + 4) {
-        r = data[i];
-        g = data[i + 1];
-        b = data[i + 2];
-        modifyData(data, r, i, g, i + 1);
+    switch (mode) {
+        case "yb":
+            modifyColorSpectrum(data, 0, 1);
+            break;
+        case "cr":
+            modifyColorSpectrum(data, 1, 2);
+            break;
+        case "mg":
+            modifyColorSpectrum(data, 0, 2);
+            break;
+        case "bw":
+            break;
+        default:
+            break;
     }
 
     image.data = data;
     context.putImageData(image, 0, 0);
-    setTimeout(draw, 10, video, context, width, height);
+    setTimeout(draw, 20, video, context, width, height);
 }
 
-function modifyData(data, firstHue, firstChannel, secondHue, secondChannel) {
-    data[firstChannel] = data[secondChannel] = (firstHue + secondHue) / 2;
+function modifyColorSpectrum(data, firstChannel, secondChannel) {
+    var i, firstHue, secondHue;
+    for (i = 0; i < data.length; i = i + 4) {
+        firstHue = data[i + firstChannel];
+        secondHue = data[i + secondChannel];
+        data[i + firstChannel] = data[i + secondChannel] = (firstHue + secondHue) / 2;
+    }
 }
 
 function cameraSwap() {
