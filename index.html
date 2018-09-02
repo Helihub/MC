@@ -7,23 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Hello, world!</title>
+    <title>Dichromatic Vision</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <h2>Dichromatic Vision</h2>
+        <h4>How does a dog see color?</h4>
+    </header>
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
                 <div class="sidebar">
-                    <ul class="list-group">
-                        <li class="list-group-item">First item</li>
-                        <li class="list-group-item">Second item</li>
-                        <li class="list-group-item">Third item</li>
-                        <li class="list-group-item">Fourth item</li>
-                    </ul>
+                    <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" role="tab">Yellow-Blue Vision (Dogs Vision)</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab">Cyan-Red item</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab">Magenta-Green Vision</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab">Colorless Vision</a>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
@@ -36,8 +40,12 @@
     </div>
     <footer>
         <div id="button-group">
+            <lable id="camera_lable">Webcam</lable>
+            <label class="switch">
+                <input id="permission_switch" type="checkbox" onclick="startWebcam()">
+                <span class="slider round"></span>
+            </label>
             <button onclick="cameraSwap()">change Camera</button>
-            <button onclick="permissionRQT()">permission</button>
         </div>
     </footer>
 

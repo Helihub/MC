@@ -2,11 +2,13 @@
 var video = document.getElementById('video'),
     canvas = document.getElementById('canvas'),
     canvas_context = canvas.getContext('2d'),
-    vendorURL = window.URL || window.webkitURL;
+    vendorURL = window.URL || window.webkitURL,
+    video_switch = document.getElementById('permission_switch');
 
-var errorCallback = function (e) {
+var noPermision = function (e) {
     // User rejected camera request. Handle appropriately.
-    console.log("error bei error callback: " + e.message);
+    cameraTurnedOff();
+    console.log("error bei error callback: " + e.message); //TODO pictures and explain permission issues 
 };
 
 // Ensure cross-browser functionality.
@@ -17,16 +19,49 @@ navigator.getUserMedia =
     navigator.msGetUserMedia;
 
 if (navigator.getUserMedia) {
+    permissionRQT();
+} else {
+    console.log("dont support "); //debug
+    video.src = 'somevideo.webm'; // TODO: pitures
+}
+
+function permissionRQT() { //block undo
     navigator.getUserMedia({
         video: true, audio: false
     }, function (stream) {
+        video_switch.checked = true;
         video.src = vendorURL.createObjectURL(stream);
         video.play();
-    }, errorCallback);
-} else {
-    console.log("dont support "); //debug
-    video.src = 'somevideo.webm'; // fallback.
+    }, noPermision);
 }
+
+function startWebcam() {
+    if (video_switch.checked) {
+        if (video.readyState) {
+            console.log("in ready gleich play");
+            video.play();
+        } else {
+            console.log("not ready gleich permission");
+            cameraTurnedOff();
+        }
+    } else {
+        cameraTurnedOff();
+    }
+}
+
+function cameraTurnedOff() {
+    video.load();
+    video.pause();
+    canvas_context.beginPath();
+    canvas_context.rect(0, 0, canvas.width, canvas.height);
+    canvas_context.fillStyle = "#d5d8dc";
+    canvas_context.fill();
+    video_switch.checked = false;
+}
+
+video.addEventListener('ended', function () {
+    cameraTurnedOff();
+}, false);
 
 video.addEventListener('play', function () {
     draw(this, canvas_context, canvas.width, canvas.height);
@@ -53,15 +88,6 @@ function draw(video, context, width, height) {
 
 function modifyData(data, firstHue, firstChannel, secondHue, secondChannel) {
     data[firstChannel] = data[secondChannel] = (firstHue + secondHue) / 2;
-}
-
-function permissionRQT() { //block undo
-    navigator.getUserMedia({
-        video: true
-    }, function (stream) {
-        video.src = vendorURL.createObjectURL(stream);
-        video.play();
-    }, errorCallback)
 }
 
 function cameraSwap() {

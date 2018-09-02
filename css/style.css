@@ -1,8 +1,24 @@
 ﻿body {
+    font-family: 'Nunito';
+    font-weight: 600;
 }
 
 header {
     min-height: 15vh;
+    padding: 10px;
+}
+
+h2, h4 {
+    color: white;
+    margin: 0px;
+}
+
+h2 {
+    font-weight: 200;
+}
+
+h4 {
+    font-weight: 900;
 }
 
 footer {
@@ -42,11 +58,24 @@ header, footer {
     overflow: auto;
 }
 
-.list-group {
+#list-tab {
+    overflow-x: hidden;
+    padding: 10px;
+    padding-right: 20px;
 }
 
 .list-group-item {
+    height: 100px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow-y: hidden;
 }
+
+    .list-group-item.active {
+        background-color: #ffd800 !important;
+        border-color: #ffd800;
+    }
 
 .content {
     height: 100%;
@@ -57,8 +86,8 @@ header, footer {
 }
 
 #video {
-    height: 30%;    /*100%*/
-    width: 30%;     /*100%*/
+    height: 30%; /*100%*/
+    width: 30%; /*100%*/
     background: #000000;
     object-fit: cover;
     position: absolute;
@@ -70,7 +99,7 @@ header, footer {
 #canvas {
     height: 100%; /*100%*/
     width: 100%; /*100%*/
-    background: #ff0000;
+    background: #d5d8dc;
     object-fit: cover;
     position: absolute;
     top: 50%;
@@ -85,5 +114,73 @@ header, footer {
 #button-group {
     position: absolute;
     right: 10px;
-
+    vertical-align: middle;
 }
+
+#camera_lable {
+    transform: translateY(-60%);
+    color: white;
+    font-size: larger;
+}
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-bottom: unset;
+}
+
+    .switch input {
+        display: none;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
