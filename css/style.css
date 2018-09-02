@@ -70,6 +70,8 @@ header, footer {
     margin-top: 5px;
     margin-bottom: 5px;
     overflow-y: hidden;
+    vertical-align: middle;
+    /*text-align: center;*/
 }
 
     .list-group-item.active {

@@ -90,6 +90,13 @@ function draw(video, context, width, height) {
             modifyColorSpectrum(data, 0, 2);
             break;
         case "bw":
+            var i, r, g, b;
+            for (i = 0; i < data.length; i = i + 4) {
+                r = data[i];
+                g = data[i + 1];
+                b = data[i + 2];
+                data[i] = data[i + 1] = data[i + 2] = (r + g + b) / 3;
+            }
             break;
         default:
             break;
