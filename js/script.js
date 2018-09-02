@@ -16,6 +16,7 @@ navigator.getUserMedia =
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia;
 
+console.log("video: " + JSON.stringify(typeof (video))); //debug
 if (navigator.getUserMedia) {
     navigator.getUserMedia({
         video: true, audio: false
@@ -24,6 +25,7 @@ if (navigator.getUserMedia) {
         video.play();
     }, errorCallback);
 } else {
+    console.log("dont support "); //debug
     video.src = 'somevideo.webm'; // fallback.
 }
 
@@ -47,6 +49,6 @@ function draw(video, context, width, height) {
     }
 
     image.data = data;
-    context.putImageData(image, 0, 0); * /
+    context.putImageData(image, 0, 0);
     setTimeout(draw, 10, video, context, width, height);
 }
