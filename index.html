@@ -21,34 +21,43 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-                <div class="sidebar">
+                <div id="list_group" class="sidebar">
                     <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list" id="yb" role="tab">
+                        <a class="list-group-item list-group-item-action active" data-toggle="list" id="yb-big" value="yb" role="tab">
                             <font id="dog_lable">Dogs Vision</font><br />
                             Yellow-Blue Vision
                         </a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" id="cr" role="tab">Cyan-Red Vision</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" id="mg" role="tab">Magenta-Green Vision</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list" id="bw" role="tab">Colorless Vision</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" id="cr-big" value="cr" role="tab">Cyan-Red Vision</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" id="mg-big" value="mg" role="tab">Magenta-Green Vision</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" id="bw-big" value="bw" role="tab">Colorless Vision</a>
+                    </div>
+                </div>
+                <div class="btn-group-wrap">
+                    <div id="button_group" class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary active" id="yb">..</button>
+                        <button type="button" class="btn btn-secondary" id="cr">..</button>
+                        <button type="button" class="btn btn-secondary" id="mg">..</button>
+                        <button type="button" class="btn btn-secondary" id="bw">..</button>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+            <div id="contentwrap" class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
                 <div class="content">
-                    <canvas id="canvas" width="400" height="300"></canvas>
+                    <canvas id="canvas"></canvas>
+                    <img id="defauldImg" src="./media/dog.jpg" />
                     <video id="video" autoplay> </video>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
+    <footer> <!--class="fixed-bottom"-->
         <div id="button-group">
             <lable id="camera_lable">Webcam</lable>
             <label class="switch">
                 <input id="permission_switch" type="checkbox" onclick="startWebcam()">
                 <span class="slider round"></span>
             </label>
-            <button onclick="cameraSwap()">change Camera</button>
+            <button id="swapCamera" onclick="cameraSwap()">change Camera</button>
         </div>
     </footer>
 

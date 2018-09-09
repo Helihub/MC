@@ -4,12 +4,15 @@ var video = document.getElementById('video'),
     canvas_context = canvas.getContext('2d'),
     vendorURL = window.URL || window.webkitURL,
     video_switch = document.getElementById('permission_switch'),
+    defaultImage = document.getElementById('defauldImg');
     mode = "yb";
 
 var noPermision = function (e) {
     // User rejected camera request. Handle appropriately.
     cameraTurnedOff();
-    console.log("error bei error callback: " + e.message); //TODO pictures and explain permission issues 
+    video.
+    draw(defaultImage, canvas_context, canvas.width, canvas.height);
+    console.log("error bei error callback: " + e.message); //TODO explain permission issues 
 };
 
 // Ensure cross-browser functionality.
@@ -23,7 +26,7 @@ if (navigator.getUserMedia) {
     permissionRQT();
 } else {
     console.log("dont support "); //debug
-    video.src = 'somevideo.webm'; // TODO: pitures
+    draw(defaultImage, canvas_context, canvas.width, canvas.height);
 }
 
 function permissionRQT() { //block undo
@@ -61,6 +64,10 @@ function cameraTurnedOff() {
 }
 
 $('.list-group-item').on('click', function () {
+    mode = $(this).attr('value');
+})
+
+$('.btn-secondary').on('click', function () {
     mode = $(this).attr('id');
 })
 

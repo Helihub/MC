@@ -1,6 +1,7 @@
 ﻿body {
     font-family: 'Nunito';
     font-weight: 600;
+    height: 100%;
 }
 
 header {
@@ -26,21 +27,20 @@ footer {
     padding: 10px;
 }
 
-header, footer {
+header, footer, #button_group {
     background: #2f2f2f;
 }
 
 .container {
-    min-height: 70vh;
-    width: 100vw;
-    background: #ffd800;
+    height: 100%;
+    width: 100%;
+    background: white; /* : #ffd800;*/
     padding-top: 0px;
     padding-bottom: 0px;
 }
 
 .row {
-    min-height: 100%;
-    max-height: 100%;
+    height: 100%;
     background: #4800ff;
     padding: 0px;
 }
@@ -75,9 +75,25 @@ header, footer {
 }
 
     .list-group-item.active {
-        background-color: #ffd800 !important;
-        border-color: #ffd800;
+        border: none;
     }
+
+#yb-big.active {
+    background-image: linear-gradient(90deg, yellow, blue);
+}
+
+#cr-big.active {
+    background-image: linear-gradient(90deg, cyan, red);
+}
+
+#mg-big.active {
+    background-image: linear-gradient(90deg, magenta, #00FF00);
+}
+
+#bw-big.active {
+    background-image: linear-gradient(90deg, black, white);
+    color:#ffd800;
+}
 
 .content {
     height: 100%;
@@ -87,7 +103,7 @@ header, footer {
     position: relative;
 }
 
-#video {
+#video, #defauldImg {
     height: 30%; /*100%*/
     width: 30%; /*100%*/
     background: #000000;
@@ -124,8 +140,6 @@ header, footer {
     color: white;
     font-size: larger;
 }
-
-
 
 
 .switch {
@@ -188,5 +202,74 @@ input:checked + .slider:before {
     }
 
 #dog_lable {
-    font-weight:bold;
+    font-weight: bold;
+}
+
+@media (min-width: 0px) and (max-width: 767.98px) {
+    #swapCamera {
+        display: none;
+    }
+
+    #list_group {
+        display: none !important;
+    }
+
+    #button_group {
+        display: block;
+        width: 100%;
+    }
+
+        #button_group > button {
+            width: 20%;
+            border: none;
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+
+    .btn-group-wrap {
+        text-align: center;
+    }
+
+    .btn-group {
+        margin: 0 auto;
+        text-align: center;
+        width: inherit;
+        display: inline-block;
+    }
+
+    #yb {
+        /*background-image: linear-gradient(90deg, yellow, blue);*/
+        background: linear-gradient(to right bottom, yellow 50%, #0000FF 50%);
+        color: #0000FF;
+    }
+
+    #cr {
+        /*background-image: linear-gradient(90deg, cyan, red);*/
+        background: linear-gradient(to right bottom, cyan 50%, red 50%);
+        color: #FF0000;
+    }
+
+    #mg {
+        background: linear-gradient(to right bottom, #FF00FF 50%, #00FF00 50%);
+        color: #00FF00;
+    }
+
+    #bw {
+        background: linear-gradient(to right bottom, black 50%, white 50%);
+        color: white;
+    }
+}
+
+@media (min-width: 768px) {
+    #swapCamera {
+        display: none;
+    }
+
+    #list_group {
+        display: grid;
+    }
+
+    #button_group {
+        display: none;
+    }
 }
