@@ -4,7 +4,8 @@ var video = document.getElementById('video'),
     canvas_context = canvas.getContext('2d'),
     vendorURL = window.URL || window.webkitURL,
     video_switch = document.getElementById('permission_switch'),
-    defaultImage = document.getElementById('defauldImg');
+    defaultImage = document.getElementById('defauldImg'),
+    myTimeout,
     mode = "yb";
 
 var noPermision = function (e) {
@@ -54,7 +55,9 @@ function startWebcam() {
 function cameraTurnedOff() {
     video.load();
     video.pause();
+    video.style.display = 'none';
     draw(defaultImage, canvas_context, canvas.width, canvas.height);
+    clearTimeout(myTimeout);
     video_switch.checked = false;
 }
 
@@ -71,6 +74,7 @@ video.addEventListener('ended', function () {
 }, false);
 
 video.addEventListener('play', function () {
+    clearTimeout(myTimeout);
     draw(this, canvas_context, canvas.width, canvas.height);
 }, false);
 
@@ -106,7 +110,7 @@ function draw(video, context, width, height) {
 
     image.data = data;
     context.putImageData(image, 0, 0);
-    setTimeout(draw, 20, video, context, width, height);
+    myTimeout = setTimeout(draw, 20, video, context, width, height);
 }
 
 function modifyColorSpectrum(data, firstChannel, secondChannel) {
