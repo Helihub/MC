@@ -10,8 +10,6 @@ var video = document.getElementById('video'),
 var noPermision = function (e) {
     // User rejected camera request. Handle appropriately.
     cameraTurnedOff();
-    video.
-    draw(defaultImage, canvas_context, canvas.width, canvas.height);
     console.log("error bei error callback: " + e.message); //TODO explain permission issues 
 };
 
@@ -56,10 +54,7 @@ function startWebcam() {
 function cameraTurnedOff() {
     video.load();
     video.pause();
-    canvas_context.beginPath();
-    canvas_context.rect(0, 0, canvas.width, canvas.height);
-    canvas_context.fillStyle = "#d5d8dc";
-    canvas_context.fill();
+    draw(defaultImage, canvas_context, canvas.width, canvas.height);
     video_switch.checked = false;
 }
 
