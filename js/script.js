@@ -57,7 +57,6 @@ function cameraTurnedOff() {
     video.pause();
     video.style.display = 'none';
     draw(defaultImage, canvas_context, canvas.width, canvas.height);
-    clearTimeout(myTimeout);
     video_switch.checked = false;
 }
 
@@ -74,12 +73,11 @@ video.addEventListener('ended', function () {
 }, false);
 
 video.addEventListener('play', function () {
-    clearTimeout(myTimeout);
     draw(this, canvas_context, canvas.width, canvas.height);
 }, false);
 
 function draw(video, context, width, height) {
-    var data, brightness;
+    var data;
 
     context.drawImage(video, 0, 0, width, height);
     image = context.getImageData(0, 0, width, height);
@@ -110,6 +108,7 @@ function draw(video, context, width, height) {
 
     image.data = data;
     context.putImageData(image, 0, 0);
+    clearTimeout(myTimeout);
     myTimeout = setTimeout(draw, 20, video, context, width, height);
 }
 
