@@ -11,7 +11,7 @@ var video = document.getElementById('video'),
 var noPermision = function (e) {
     // User rejected camera request. Handle appropriately.
     cameraTurnedOff();
-    console.log("error bei error callback: " + e.message); //TODO explain permission issues 
+    console.log("error bei error callback: " + e.message); //TODO explain permission issues
 };
 
 // Ensure cross-browser functionality.
@@ -33,7 +33,8 @@ function permissionRQT() { //block undo
         video: true, audio: false
     }, function (stream) {
         video_switch.checked = true;
-        video.src = vendorURL.createObjectURL(stream);
+        //video.src = vendorURL.createObjectURL(stream);
+        video.srcObject = stream;
         video.play();
     }, noPermision);
 }
